@@ -1,0 +1,16 @@
+export CUDA_VISIBLE_DEVICES=1,2; accelerate launch --main_process_port 20687 run_summarization.py \
+    --model_name_or_path t5-large \
+    --do_train \
+    --do_eval \
+    --logging_steps 10 \
+    --dataset_name cnn_dailymail \
+    --dataset_config "3.0.0" \
+    --source_prefix "summarize: " \
+    --output_dir /tmp/tst-summarization \
+    --per_device_train_batch_size=4 \
+    --per_device_eval_batch_size=4 \
+    --overwrite_output_dir \
+    --predict_with_generate \
+    --num_train_epochs 0.05 \
+    --report_to wandb \
+    --run_name lambda2_2gpu_fp32
